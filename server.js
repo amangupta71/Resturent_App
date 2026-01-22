@@ -7,11 +7,16 @@ require('dotenv').config({ quiet: true });
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "*", // later restrict to Firebase domain
+}));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
 
 //import routes
 const testRoutes = require('./routes/testRouter');
@@ -36,6 +41,10 @@ app.use('/api/v1/food', foodRoutes);
 app.get('/',(req,res)=>{
     res.status(200).send('<h1>welcome to returent<h1>');
 });
+
+const couponRoutes = require("./routes/couponRoutes");
+app.use("/api/v1/coupon", couponRoutes);
+
 
 
 const PORT = process.env.PORT || 3000;

@@ -196,7 +196,8 @@ const getUserOrdersController = async (req, res) => {
 
 const placeOrdercontroller = async (req, res) => {
   try {
-    const { cart } = req.body;
+   const { cart, couponCode, discount } = req.body;
+
      console.log("🛒 CART RECEIVED:", cart);
 
     if (!cart || cart.length === 0) {
@@ -209,6 +210,10 @@ const placeOrdercontroller = async (req, res) => {
   if (!item.foodId) {
     throw new Error("Food ID missing in cart item");
   }
+  let total = 0;
+cart.forEach(i => {
+  total += i.price * i.quantity;
+});
 
   total += item.price * (item.quantity || 1);
 

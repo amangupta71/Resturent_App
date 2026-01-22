@@ -24,6 +24,14 @@ const orderSchema = new mongoose.Schema({
          type: Number,
          required: true,
     },
+    coupon: {
+      code: String,
+      discount: {
+        type: Number,
+        default: 0,
+      },
+    },
+
     buyer: {
             type:mongoose.Schema.Types.ObjectId,
             ref:"User",
