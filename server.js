@@ -7,9 +7,17 @@ require('dotenv').config({ quiet: true });
 
 const app = express();
 
+const cors = require("cors");
+
 app.use(cors({
-  origin: "*", // later restrict to Firebase domain
+  origin: [
+    "https://resturent-app-front.web.app",
+    "https://resturent-app-front.firebaseapp.com"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
+
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
