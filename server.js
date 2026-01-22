@@ -7,7 +7,6 @@ require('dotenv').config({ quiet: true });
 
 const app = express();
 
-const cors = require("cors");
 
 app.use(cors({
   origin: [
